@@ -30,12 +30,8 @@ steps:
     buildForSimulator: true
     packageApp: false
 
-# Xamarin.iOS
-- task: VSTest@2
+- task: XamarinAndroid@1
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+    projectFile: '**/*Droid*.csproj'
+    outputDirectory: '$(outputDirectory)'
+    configuration: '$(buildConfiguration)'
