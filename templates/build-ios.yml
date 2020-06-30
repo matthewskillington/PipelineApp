@@ -6,7 +6,7 @@ parameters:
 
 ### JOBS ###
 jobs:
-- job: 'Build iOS'
+- job: 'BuildiOS'
   displayName: 'Build iOS'
   pool: 
     vmImage: 'macos-latest'
