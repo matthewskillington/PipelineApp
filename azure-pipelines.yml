@@ -5,15 +5,25 @@ parameters:
   type: boolean
   default: true
 
+- name: ShouldRunUnitTests
+  displayName: Run Unit Tests?
+  type: boolean
+  default: true
+
 # Build a Xamarin.iOS project.
 # Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
 
-trigger:
-- master
+trigger: none
 
 jobs:
 # Build iOS
 - template: ./templates/build-ios.yml
   parameters:
     isEnabled: ${{ parameters.ShouldBuildiOS }}
+
+# Run unit tests
+- template: ./templates/build-run-unit-tests.yml
+  parameters:
+    isEnabled: ${{ parameters.ShouldRunUnitTests }}
+  

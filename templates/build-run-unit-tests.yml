@@ -1,0 +1,22 @@
+# (Optional) Flag to indicate whether or not the tasks in this template are enabled (Defaults to true)
+parameters:
+- name: isEnabled
+  type: boolean
+  default: true
+
+jobs:
+- job: 'UnitTests'
+  displayName: 'Build & Run Unit Tests'
+  pool:
+    vmImage: 'windows-latest'
+
+  steps:
+  - task: VSTest@2
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+    enabled: ${{ parameters.isEnabled }}
