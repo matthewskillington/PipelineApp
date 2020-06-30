@@ -1,3 +1,10 @@
+####  PARAMETERS ####
+parameters:
+# (Optional) Flag to indicate whether or not the tasks in this template are enabled (Defaults to true)
+- name: isEnabled
+  type: boolean
+  default: true
+
 # Build a Xamarin.iOS project.
 # Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
@@ -29,6 +36,7 @@ steps:
     configuration: 'Release'
     buildForSimulator: true
     packageApp: false
+  enabled: ${{ parameters.isEnabled }}
 
 - task: XamarinAndroid@1
   inputs:
