@@ -32,6 +32,6 @@ steps:
 
 - task: XamarinAndroid@1
   inputs:
-    projectFile: '**/*Droid*.csproj'
+    projectFile: '**/**/*Droid*.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
