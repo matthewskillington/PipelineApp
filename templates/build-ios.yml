@@ -1,4 +1,5 @@
 # (Optional) Flag to indicate whether or not the tasks in this template are enabled (Defaults to true)
+parameters:
 - name: isEnabled
   type: boolean
   default: true
