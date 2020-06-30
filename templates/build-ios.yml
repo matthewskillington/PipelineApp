@@ -5,7 +5,7 @@ parameters:
   default: true
 
 ### JOBS ###
-jobs: BuildiOS
+jobs:
 - job: 'Build iOS'
   displayName: 'Build iOS'
   pool: 
