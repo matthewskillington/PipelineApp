@@ -15,8 +15,9 @@ jobs:
     inputs:
       testSelector: 'testAssemblies'
       testAssemblyVer2: |
-        **\*test*.dll
-        !**\*TestAdapter.dll
-        !**\obj\**
-      searchFolder: '$(System.DefaultWorkingDirectory)'
+       **\bin\$(BuildConfiguration)\**\*test*.dll
+       !**\obj\**
+       !**\xunit.runner.visualstudio.testadapter.dll
+       !**\xunit.runner.visualstudio.dotnetcore.testadapter.dll '$(System.DefaultWorkingDirectory)'
+    searchFolder: '$(System.DefaultWorkingDirectory)'
     enabled: ${{ parameters.isEnabled }}
