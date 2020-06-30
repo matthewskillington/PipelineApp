@@ -1,0 +1,28 @@
+# (Optional) Flag to indicate whether or not the tasks in this template are enabled (Defaults to true)
+- name: isEnabled
+  type: boolean
+  default: true
+
+### JOBS ###
+jobs: BuildiOS
+- job: 'Build iOS'
+  displayName: 'Build iOS'
+  pool: 
+    vmImage: 'macos-latest'
+
+  steps:
+  - task: NuGetToolInstaller@1
+    enabled: ${{ parameters.isEnabled }}
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+    enabled: ${{ parameters.isEnabled }}
+
+  - task: XamariniOS@2
+    inputs:
+      solutionFile: '**/*.sln'
+      configuration: 'Release'
+      buildForSimulator: true
+      packageApp: false
+    enabled: ${{ parameters.isEnabled }}

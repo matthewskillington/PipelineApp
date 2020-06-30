@@ -1,7 +1,7 @@
 ####  PARAMETERS ####
 parameters:
-# (Optional) Flag to indicate whether or not the tasks in this template are enabled (Defaults to true)
-- name: isEnabled
+- name: ShouldBuildiOS
+  displayName: Build iOS?
   type: boolean
   default: true
 
@@ -12,8 +12,10 @@ parameters:
 trigger:
 - master
 
-pool:
-  vmImage: 'macos-latest'
+# Build iOS
+- template: ./templates/build-ios.yml
+  parameters:
+    isEnabled: ${{ parameters.ShouldBuildiOS }}
 
 steps:
 # To manually select a Xamarin SDK version on the Microsoft-hosted macOS agent,
@@ -23,20 +25,6 @@ steps:
 - script: sudo $AGENT_HOMEDIRECTORY/scripts/select-xamarin-sdk.sh 5_12_0
   displayName: 'Select the Xamarin SDK version'
   enabled: false
-
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
-
-- task: XamariniOS@2
-  inputs:
-    solutionFile: '**/*.sln'
-    configuration: 'Release'
-    buildForSimulator: true
-    packageApp: false
-  enabled: ${{ parameters.isEnabled }}
 
 - task: XamarinAndroid@1
   inputs:
